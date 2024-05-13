@@ -17,12 +17,17 @@ java {
 
 repositories {
 	mavenCentral()
+	maven { url = uri("https://repo.spring.io/snapshot") }
 }
 
 dependencies {
-	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+	implementation ("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
+	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0")
+	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+
 	runtimeOnly("org.postgresql:postgresql")
+	annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
@@ -35,4 +40,8 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+}
+
+tasks.bootBuildImage {
+	builder.set("paketobuildpacks/builder-jammy-base:latest")
 }
