@@ -25,6 +25,7 @@ class TodoController(
     fun getTodoList(
         @PageableDefault(size = 10) pageable: Pageable
     ): ResponseEntity<List<TodoResponse>> {
+        pageable.sort.distinct()
         return ResponseEntity.status(HttpStatus.OK).body(service.getAllTodo(pageable))
     }
 
