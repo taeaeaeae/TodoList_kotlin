@@ -1,5 +1,7 @@
 package taekyoung.TodoList.todos.controller
 
+import org.springframework.data.domain.Pageable
+import org.springframework.data.web.PageableDefault
 import org.springframework.http.HttpStatus
 import org.springframework.http.RequestEntity
 import org.springframework.http.ResponseEntity
@@ -20,8 +22,10 @@ class TodoController(
     }
 
     @GetMapping()
-    fun getTodoList(): ResponseEntity<List<TodoResponse>> {
-        return ResponseEntity.status(HttpStatus.OK).body(service.getAllTodo())
+    fun getTodoList(
+        @PageableDefault(size = 10) pageable: Pageable
+    ): ResponseEntity<List<TodoResponse>> {
+        return ResponseEntity.status(HttpStatus.OK).body(service.getAllTodo(pageable))
     }
 
     @GetMapping("/{todoId}")

@@ -1,5 +1,6 @@
 package taekyoung.TodoList.todos.service
 
+import org.springframework.data.domain.Pageable
 import taekyoung.TodoList.reply.dto.AddReplyRequest
 import taekyoung.TodoList.reply.dto.ReplyResponse
 import taekyoung.TodoList.reply.dto.UpdateReplyRequest
@@ -8,7 +9,7 @@ import taekyoung.TodoList.todos.dto.TodoResponse
 import taekyoung.TodoList.todos.dto.UpdateTodoRequest
 
 interface TodoService {
-    fun getAllTodo() : List<TodoResponse>
+    fun getAllTodo(pageable: Pageable) : List<TodoResponse>
     fun getTodoById(todoId:Long) : TodoResponse
     fun createTodo(request : CreateTodoRequest): TodoResponse
     fun updateTodo(todoId: Long, request : UpdateTodoRequest) : TodoResponse

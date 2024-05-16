@@ -1,5 +1,7 @@
 package taekyoung.TodoList.todos.service
 
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -23,8 +25,9 @@ class TodoServiceImpl(
     private val todoRepository: TodoRepository,
     private val replyRepository: ReplyRepository
 ) : TodoService {
-    override fun getAllTodo(): List<TodoResponse> {
-        return repository.findAll().map { it.toResponse() }
+    override fun getAllTodo(pageable: Pageable): List<TodoResponse> {
+        val todo : Page<Todo> = repository.findAll(pageable)
+        return todo.content.map { it.toResponse() }
     }
 
     override fun getTodoById(todoId: Long): TodoResponse {

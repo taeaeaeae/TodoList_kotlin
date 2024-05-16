@@ -2,7 +2,9 @@ package taekyoung.TodoList.todos.model
 
 import jakarta.persistence.*
 import taekyoung.TodoList.reply.model.Reply
+import taekyoung.TodoList.reply.model.toResponse
 import taekyoung.TodoList.todos.dto.TodoResponse
+import java.util.*
 
 @Entity
 @Table(name = "todo_list")
@@ -18,6 +20,9 @@ class Todo (
 
     @Column(name = "y_n")
     var yn: Boolean = false,
+
+//    @Column(name="created_at")
+//    var createdAt: Date,
 
     @OneToMany(mappedBy = "todo", fetch = FetchType.LAZY, orphanRemoval = true)
     var replys: MutableList<Reply> = mutableListOf(),
@@ -36,6 +41,7 @@ fun Todo.toResponse() : TodoResponse {
         title=title,
         content=content,
         uid=uid,
-        yn=yn
+        yn=yn,
+        reply = replys.map { it.toResponse() }
     )
 }
