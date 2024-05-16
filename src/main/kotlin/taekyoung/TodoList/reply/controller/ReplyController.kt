@@ -32,6 +32,7 @@ class ReplyController (
 
     @DeleteMapping("/{replyId}")
     fun removeReply(@PathVariable("todoId") todoId: Long,@PathVariable("replyId") replyId: Long): ResponseEntity<Unit> {
+        todoService.deleteReply(todoId, replyId)
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build()
     }
 

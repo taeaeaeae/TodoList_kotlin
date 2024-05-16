@@ -39,6 +39,7 @@ class TodoController(
 
     @DeleteMapping("/{todoId}")
     fun deleteTodo(@PathVariable todoId: Long): ResponseEntity<Unit> {
+        service.deleteTodo(todoId)
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build()
     }
 }
