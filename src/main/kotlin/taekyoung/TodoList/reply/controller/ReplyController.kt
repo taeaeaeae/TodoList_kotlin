@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.*
 import taekyoung.TodoList.reply.dto.AddReplyRequest
 import taekyoung.TodoList.reply.dto.ReplyResponse
 import taekyoung.TodoList.reply.dto.UpdateReplyRequest
-import taekyoung.TodoList.reply.model.Reply
 import taekyoung.TodoList.todos.service.TodoService
 
 @RequestMapping("/todos/{todoId}/reply")
