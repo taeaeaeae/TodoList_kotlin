@@ -1,5 +1,5 @@
 # TodoList
-투두앱 백엔드 서버 만들기
+투두앱 백엔드 서버 만들기
 할일을 등록하고 상태를 관리할 수 있다.
 - 할일카드를 작성, 수정, 삭제, 조회 할 수 있다.
 - 할일 카드를 완료상태로 변경할 수 있다.
@@ -35,6 +35,22 @@
 <br>
 
 ## API 명세서
+### TODO
+기능|method|URL|response
+--|--|--|--
+목록조회|`GET`|/todos|등록된 할일들 정보
+할일조회|`GET`|/todo/{todoId}|등록된 할일 정보
+할일등록|`POST`|/todos|할일 등록 결과
+할일수정|`PUT`|/todos/{todoId}|할일 수정 결과
+할일삭제|`DELETE`|/todo/{todoId}|할일 삭제 결과
+
+### REPLY
+기능|method|URL|response
+--|--|--|--
+댓글조회|`GET`|/todo/{todoId}/reply|등록된 댓글 내용
+댓글등록|`POST`|/todo/{todoId}/reply|댓글 등록 결과
+댓글수정|`PUT`|/todos/{todoId}/reply/{replyId}|댓글 수정 결과
+댓글삭제|`DELETE`|/todo/{todoId}/reply/{replyId}|댓글 삭제 결과
 
 <br>
 
