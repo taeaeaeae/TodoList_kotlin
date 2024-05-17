@@ -32,7 +32,8 @@
 <br>
 
 ## 유스케이스 다이어그램
-![image](https://github.com/taeaeaeae/TodoList_kotlin/assets/46617216/9de03bdf-6739-4ef3-bbb6-88fba1fa9efb)
+![image](https://github.com/taeaeaeae/TodoList_kotlin/assets/46617216/3d778508-80e1-413f-984b-dbc309b60c9f)
+
 
 <br>
 
