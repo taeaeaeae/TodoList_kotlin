@@ -19,9 +19,6 @@ class Todo (
     @Column(name = "y_n")
     var yn: Boolean = false,
 
-//    @Column(name="created_at")
-//    var createdAt: Date,
-
     @OneToMany(mappedBy = "todo", fetch = FetchType.LAZY, orphanRemoval = true)
     var replys: MutableList<Reply> = mutableListOf(),
 ){

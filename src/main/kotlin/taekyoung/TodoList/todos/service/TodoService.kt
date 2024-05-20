@@ -14,8 +14,4 @@ interface TodoService {
     fun createTodo(request : CreateTodoRequest): TodoResponse
     fun updateTodo(todoId: Long, request : UpdateTodoRequest) : TodoResponse
     fun deleteTodo(todoId: Long)
-    fun getReplyList(todoId: Long): List<ReplyResponse>
-    fun addReply(todoId: Long, request : AddReplyRequest) : ReplyResponse
-    fun updateReply(todoId: Long, replyId: Long, request: UpdateReplyRequest): ReplyResponse
-    fun deleteReply(todoId: Long, replyId: Long)
 }
