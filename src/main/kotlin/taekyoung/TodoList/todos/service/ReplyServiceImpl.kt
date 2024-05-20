@@ -1,5 +1,6 @@
 package taekyoung.TodoList.todos.service
 
+import org.springframework.data.domain.Page
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -8,6 +9,7 @@ import taekyoung.TodoList.todos.dto.AddReplyRequest
 import taekyoung.TodoList.todos.dto.ReplyResponse
 import taekyoung.TodoList.todos.dto.UpdateReplyRequest
 import taekyoung.TodoList.todos.model.Reply
+import taekyoung.TodoList.todos.model.Todo
 import taekyoung.TodoList.todos.model.toResponse
 import taekyoung.TodoList.todos.repository.ReplyRepository
 import taekyoung.TodoList.todos.repository.TodoRepository
@@ -20,7 +22,9 @@ class ReplyServiceImpl(
 
     override fun getReplyList(todoId: Long): List<ReplyResponse> {
         val todo = todoRepository.findByIdOrNull(todoId) ?: throw ModelNotFoundException("Todo",todoId)
-        return todo.replys.map { it.toResponse() }
+//        return todo.replys.map { it.toResponse() }
+//        val reply : Page<Todo> = repository.findAll(pageable)
+        return repository.findAll().map { it.toResponse() }
     }
 
     @Transactional
@@ -50,11 +54,13 @@ class ReplyServiceImpl(
 
     @Transactional
     override fun deleteReply(todoId: Long, replyId: Long) {
-        val todo = todoRepository.findByIdOrNull(todoId) ?: throw ModelNotFoundException("Todo",todoId)
+//        val todo = todoRepository.findByIdOrNull(todoId) ?: throw ModelNotFoundException("Todo",todoId)
         val reply = repository.findByIdOrNull(replyId) ?: throw ModelNotFoundException("Reply",replyId)
 
-        todo.removeReply(reply)
-        todoRepository.save(todo)
+//        todo.removeReply(reply)
+
+//        todoRepository.save(todo)
+        repository.delete(reply)
     }
 
 }

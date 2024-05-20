@@ -19,16 +19,16 @@ class Todo (
     @Column(name = "y_n")
     var yn: Boolean = false,
 
-    @OneToMany(mappedBy = "todo", fetch = FetchType.LAZY, orphanRemoval = true)
-    var replys: MutableList<Reply> = mutableListOf(),
+//    @OneToMany(mappedBy = "todo", fetch = FetchType.LAZY, orphanRemoval = true)
+//    var replys: MutableList<Reply> = mutableListOf(),
 ){
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id:Long? = null
 
-    fun removeReply(reply: Reply) {
-        replys.remove(reply)
-    }
+//    fun removeReply(reply: Reply) {
+//        replys.remove(reply)
+//    }
 
     fun updateTodos(todo: UpdateTodoRequest) {
         title = if(todo.title == "" || todo.title=="string") title else todo.title
@@ -43,6 +43,6 @@ fun Todo.toResponse() : TodoResponse {
         content=content,
         uid=uid,
         yn=yn,
-        reply = replys.map { it.toResponse() }
+//        reply = replys.map { it.toResponse() }
     )
 }

@@ -21,6 +21,7 @@ class Reply(
 ) {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Column(name = "id")
     var id: Long? = null
 }
 fun Reply.toResponse(): ReplyResponse {

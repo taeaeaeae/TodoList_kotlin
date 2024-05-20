@@ -7,5 +7,5 @@ data class TodoResponse(
     val yn : Boolean,
     val uid: String,
 //    val createAt:Date,
-    val reply: List<ReplyResponse>
+//    val reply: List<ReplyResponse>
 )
