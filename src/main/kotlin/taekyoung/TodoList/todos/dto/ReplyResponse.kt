@@ -1,4 +1,4 @@
-package taekyoung.TodoList.reply.dto
+package taekyoung.TodoList.todos.dto
 
 data class ReplyResponse (
     val id:Long,

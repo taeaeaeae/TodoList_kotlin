@@ -1,10 +1,8 @@
 package taekyoung.TodoList.todos.model
 
 import jakarta.persistence.*
-import taekyoung.TodoList.reply.model.Reply
-import taekyoung.TodoList.reply.model.toResponse
 import taekyoung.TodoList.todos.dto.TodoResponse
-import java.util.*
+import taekyoung.TodoList.todos.dto.UpdateTodoRequest
 
 @Entity
 @Table(name = "todo_list")
@@ -33,6 +31,12 @@ class Todo (
 
     fun removeReply(reply: Reply) {
         replys.remove(reply)
+    }
+
+    fun updateTodos(todo: UpdateTodoRequest) {
+        title = if(todo.title == "" || todo.title=="string") title else todo.title
+        content = if(todo.content == "" || todo.content == "string") content else todo.content
+        yn = todo.yn
     }
 }
 fun Todo.toResponse() : TodoResponse {

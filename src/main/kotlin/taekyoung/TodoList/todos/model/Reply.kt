@@ -1,8 +1,7 @@
-package taekyoung.TodoList.reply.model
+package taekyoung.TodoList.todos.model
 
 import jakarta.persistence.*
-import taekyoung.TodoList.reply.dto.ReplyResponse
-import taekyoung.TodoList.todos.model.Todo
+import taekyoung.TodoList.todos.dto.ReplyResponse
 
 @Entity
 @Table(name = "reply")

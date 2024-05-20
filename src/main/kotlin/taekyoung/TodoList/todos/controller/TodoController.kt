@@ -3,7 +3,6 @@ package taekyoung.TodoList.todos.controller
 import org.springframework.data.domain.Pageable
 import org.springframework.data.web.PageableDefault
 import org.springframework.http.HttpStatus
-import org.springframework.http.RequestEntity
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import taekyoung.TodoList.todos.dto.CreateTodoRequest
@@ -25,7 +24,7 @@ class TodoController(
     fun getTodoList(
         @PageableDefault(size = 10) pageable: Pageable
     ): ResponseEntity<List<TodoResponse>> {
-        pageable.sort.distinct()
+        pageable.sort.descending()
         return ResponseEntity.status(HttpStatus.OK).body(service.getAllTodo(pageable))
     }
 

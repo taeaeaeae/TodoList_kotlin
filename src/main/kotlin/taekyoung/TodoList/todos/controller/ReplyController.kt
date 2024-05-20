@@ -1,11 +1,11 @@
-package taekyoung.TodoList.reply.controller
+package taekyoung.TodoList.todos.controller
 
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import taekyoung.TodoList.reply.dto.AddReplyRequest
-import taekyoung.TodoList.reply.dto.ReplyResponse
-import taekyoung.TodoList.reply.dto.UpdateReplyRequest
+import taekyoung.TodoList.todos.dto.AddReplyRequest
+import taekyoung.TodoList.todos.dto.ReplyResponse
+import taekyoung.TodoList.todos.dto.UpdateReplyRequest
 import taekyoung.TodoList.todos.service.TodoService
 
 @RequestMapping("/todos/{todoId}/reply")
@@ -25,7 +25,8 @@ class ReplyController (
 
     @PutMapping("/{replyId}")
     fun updateReply(@PathVariable("todoId") todoId: Long, @PathVariable("replyId") replyId: Long,
-                    @RequestBody updateReplyRequest: UpdateReplyRequest): ResponseEntity<ReplyResponse> {
+                    @RequestBody updateReplyRequest: UpdateReplyRequest
+    ): ResponseEntity<ReplyResponse> {
         return ResponseEntity.status(HttpStatus.OK).body(todoService.updateReply(todoId, replyId, updateReplyRequest))
     }
 

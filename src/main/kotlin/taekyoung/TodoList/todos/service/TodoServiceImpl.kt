@@ -9,20 +9,18 @@ import taekyoung.TodoList.todos.dto.CreateTodoRequest
 import taekyoung.TodoList.todos.dto.TodoResponse
 import taekyoung.TodoList.todos.dto.UpdateTodoRequest
 import taekyoung.TodoList.exception.ModelNotFoundException
-import taekyoung.TodoList.reply.dto.AddReplyRequest
-import taekyoung.TodoList.reply.dto.ReplyResponse
-import taekyoung.TodoList.reply.dto.UpdateReplyRequest
-import taekyoung.TodoList.reply.model.Reply
-import taekyoung.TodoList.reply.model.toResponse
-import taekyoung.TodoList.reply.repository.ReplyRepository
-import taekyoung.TodoList.todos.model.Todo
+import taekyoung.TodoList.todos.dto.AddReplyRequest
+import taekyoung.TodoList.todos.dto.ReplyResponse
+import taekyoung.TodoList.todos.dto.UpdateReplyRequest
+import taekyoung.TodoList.todos.model.Reply
 import taekyoung.TodoList.todos.model.toResponse
+import taekyoung.TodoList.todos.repository.ReplyRepository
+import taekyoung.TodoList.todos.model.Todo
 import taekyoung.TodoList.todos.repository.TodoRepository
 
 @Service
 class TodoServiceImpl(
     private val repository: TodoRepository,
-    private val todoRepository: TodoRepository,
     private val replyRepository: ReplyRepository
 ) : TodoService {
     override fun getAllTodo(pageable: Pageable): List<TodoResponse> {
@@ -49,11 +47,13 @@ class TodoServiceImpl(
     @Transactional
     override fun updateTodo(todoId: Long, request: UpdateTodoRequest): TodoResponse {
         val todo = repository.findByIdOrNull(todoId) ?: throw ModelNotFoundException("Todo",todoId)
-        val (title, content, yn) = request
+//        val (title, content, yn) = request
+//
+//        todo.title = if(title == "" || title=="string") todo.title else title
+//        todo.content = if(content == "" || content == "string") todo.content else content
+//        todo.yn = yn
 
-        todo.title = if(title == "" || title=="string") todo.title else title
-        todo.content = if(content == "" || content == "string") todo.content else content
-        todo.yn = yn
+        todo.updateTodos(request)
 
         return repository.save(todo).toResponse()
     }
@@ -65,7 +65,7 @@ class TodoServiceImpl(
     }
 
     override fun getReplyList(todoId: Long): List<ReplyResponse> {
-        val todo = todoRepository.findByIdOrNull(todoId) ?: throw ModelNotFoundException("Todo",todoId)
+        val todo = repository.findByIdOrNull(todoId) ?: throw ModelNotFoundException("Todo",todoId)
         return todo.replys.map { it.toResponse() }
     }
 
