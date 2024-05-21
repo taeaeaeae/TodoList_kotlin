@@ -2,6 +2,7 @@ package taekyoung.TodoList.todos.controller
 
 import org.springframework.data.domain.Pageable
 import org.springframework.data.web.PageableDefault
+import org.springframework.data.web.SortDefault
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -23,6 +24,7 @@ class TodoController(
 
     @GetMapping()
     fun getTodoList(
+//        @SortDefault(sort = ["desc"], direction = Sort.Direction.ASC)
         @RequestParam uid: String?,
         @PageableDefault(size = 10, page = 0) pageable: Pageable
     ): ResponseEntity<List<TodoResponse>> {
