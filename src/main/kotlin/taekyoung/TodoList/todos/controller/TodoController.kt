@@ -21,7 +21,7 @@ class TodoController(
         return ResponseEntity.status(HttpStatus.CREATED).body(service.createTodo(createCourseRequest))
     }
 
-    @GetMapping("/{uid}")
+    @GetMapping("/uid={uid}")
     fun getTodoList(
         @PathVariable uid: String,
         @PageableDefault(size = 10, page = 0) pageable: Pageable

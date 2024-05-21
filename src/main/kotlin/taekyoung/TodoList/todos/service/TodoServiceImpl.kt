@@ -19,7 +19,13 @@ class TodoServiceImpl(
     private val repository: TodoRepository
 ) : TodoService {
     override fun getAllTodo(pageable: Pageable, uid:String): List<TodoResponse> {
-        val todo : Page<Todo> = repository.findAll(pageable)
+
+        if(uid.equals("")) {
+            val todo : Page<Todo> = repository.findAll(pageable)
+
+            return todo.content.map { it.toResponse() }
+        }
+        val todo : Page<Todo> = repository.findAllByUid(uid, pageable)
         return todo.content.map { it.toResponse() }
     }
 
