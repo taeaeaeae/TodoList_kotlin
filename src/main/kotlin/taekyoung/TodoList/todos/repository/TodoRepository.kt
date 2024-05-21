@@ -7,5 +7,5 @@ import taekyoung.TodoList.todos.model.Todo
 
 interface TodoRepository : JpaRepository<Todo, Long> {
     override fun findAll( pageable: Pageable): Page<Todo>
-    fun findAllByUid(uid: String, pageable: Pageable): Page<Todo>
+    fun findAllByUid(uid: String?, pageable: Pageable): Page<Todo>
 }
