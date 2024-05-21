@@ -1,6 +1,6 @@
 package taekyoung.TodoList.todos.dto
 
-data class GetTodoResponse(
+data class GetTodoResponse (
     val id: Long,
     val title: String,
     val content: String,

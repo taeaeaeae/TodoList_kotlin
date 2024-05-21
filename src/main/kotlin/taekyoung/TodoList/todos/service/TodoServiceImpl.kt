@@ -5,17 +5,13 @@ import org.springframework.data.domain.Pageable
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import taekyoung.TodoList.todos.dto.CreateTodoRequest
-import taekyoung.TodoList.todos.dto.TodoResponse
-import taekyoung.TodoList.todos.dto.UpdateTodoRequest
 import taekyoung.TodoList.exception.ModelNotFoundException
-import taekyoung.TodoList.todos.dto.AddReplyRequest
-import taekyoung.TodoList.todos.dto.ReplyResponse
-import taekyoung.TodoList.todos.dto.UpdateReplyRequest
+import taekyoung.TodoList.todos.dto.*
 import taekyoung.TodoList.todos.model.Reply
 import taekyoung.TodoList.todos.model.toResponse
 import taekyoung.TodoList.todos.repository.ReplyRepository
 import taekyoung.TodoList.todos.model.Todo
+import taekyoung.TodoList.todos.model.toGetResponse
 import taekyoung.TodoList.todos.repository.TodoRepository
 
 @Service
@@ -27,9 +23,9 @@ class TodoServiceImpl(
         return todo.content.map { it.toResponse() }
     }
 
-    override fun getTodoById(todoId: Long): TodoResponse {
+    override fun getTodoById(todoId: Long): GetTodoResponse {
         val todo = repository.findByIdOrNull(todoId) ?: throw ModelNotFoundException("Todo",todoId)
-        return todo.toResponse()
+        return todo.toGetResponse()
     }
 
     @Transactional

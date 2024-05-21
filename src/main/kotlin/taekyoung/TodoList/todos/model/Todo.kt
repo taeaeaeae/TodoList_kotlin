@@ -1,6 +1,7 @@
 package taekyoung.TodoList.todos.model
 
 import jakarta.persistence.*
+import taekyoung.TodoList.todos.dto.GetTodoResponse
 import taekyoung.TodoList.todos.dto.TodoResponse
 import taekyoung.TodoList.todos.dto.UpdateTodoRequest
 
@@ -19,12 +20,13 @@ class Todo (
     @Column(name = "y_n")
     var yn: Boolean = false,
 
-//    @OneToMany(mappedBy = "todo", fetch = FetchType.LAZY, orphanRemoval = true)
-//    var replys: MutableList<Reply> = mutableListOf(),
+    @OneToMany(mappedBy = "todo", fetch = FetchType.LAZY, orphanRemoval = true)
+    var replys: MutableList<Reply> = mutableListOf(),
 ){
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id:Long? = null
+
 
 //    fun removeReply(reply: Reply) {
 //        replys.remove(reply)
@@ -38,11 +40,22 @@ class Todo (
 }
 fun Todo.toResponse() : TodoResponse {
     return TodoResponse(
-        id=id!!,
-        title=title,
-        content=content,
-        uid=uid,
-        yn=yn,
+        id = id!!,
+        title = title,
+        content = content,
+        uid = uid,
+        yn = yn,
 //        reply = replys.map { it.toResponse() }
+    )
+}
+
+fun Todo.toGetResponse() : GetTodoResponse {
+    return GetTodoResponse(
+        id = id!!,
+        title = title,
+        content = content,
+        uid = uid,
+        yn = yn,
+        reply = replys.map { it.toResponse() }
     )
 }

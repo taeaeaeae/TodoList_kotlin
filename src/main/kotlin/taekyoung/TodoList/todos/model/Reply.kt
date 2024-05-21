@@ -23,6 +23,8 @@ class Reply(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 //    @Column(name = "id")
     var id: Long? = null
+
+
 }
 fun Reply.toResponse(): ReplyResponse {
     return ReplyResponse(

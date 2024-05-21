@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import taekyoung.TodoList.todos.dto.CreateTodoRequest
+import taekyoung.TodoList.todos.dto.GetTodoResponse
 import taekyoung.TodoList.todos.dto.TodoResponse
 import taekyoung.TodoList.todos.dto.UpdateTodoRequest
 import taekyoung.TodoList.todos.service.ReplyService
@@ -30,7 +31,7 @@ class TodoController(
     }
 
     @GetMapping("/{todoId}")
-    fun getTodo(@PathVariable todoId: Long): ResponseEntity<TodoResponse> {
+    fun getTodo(@PathVariable todoId: Long): ResponseEntity<GetTodoResponse> {
         return ResponseEntity.status(HttpStatus.OK).body(service.getTodoById(todoId))
     }
 
