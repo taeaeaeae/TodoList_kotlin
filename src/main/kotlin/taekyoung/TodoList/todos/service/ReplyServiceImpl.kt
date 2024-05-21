@@ -54,12 +54,8 @@ class ReplyServiceImpl(
 
     @Transactional
     override fun deleteReply(todoId: Long, replyId: Long) {
-//        val todo = todoRepository.findByIdOrNull(todoId) ?: throw ModelNotFoundException("Todo",todoId)
         val reply = repository.findByIdOrNull(replyId) ?: throw ModelNotFoundException("Reply",replyId)
 
-//        todo.removeReply(reply)
-
-//        todoRepository.save(todo)
         repository.delete(reply)
     }
 
