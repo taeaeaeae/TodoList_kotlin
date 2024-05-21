@@ -9,7 +9,6 @@ import taekyoung.TodoList.todos.dto.CreateTodoRequest
 import taekyoung.TodoList.todos.dto.GetTodoResponse
 import taekyoung.TodoList.todos.dto.TodoResponse
 import taekyoung.TodoList.todos.dto.UpdateTodoRequest
-import taekyoung.TodoList.todos.service.ReplyService
 import taekyoung.TodoList.todos.service.TodoService
 
 @RequestMapping("/todos")
@@ -22,12 +21,13 @@ class TodoController(
         return ResponseEntity.status(HttpStatus.CREATED).body(service.createTodo(createCourseRequest))
     }
 
-    @GetMapping()
+    @GetMapping("/{uid}")
     fun getTodoList(
-        @PageableDefault(size = 10) pageable: Pageable
+        @PathVariable uid: String,
+        @PageableDefault(size = 10, page = 0) pageable: Pageable
     ): ResponseEntity<List<TodoResponse>> {
         pageable.sort.descending()
-        return ResponseEntity.status(HttpStatus.OK).body(service.getAllTodo(pageable))
+        return ResponseEntity.status(HttpStatus.OK).body(service.getAllTodo(pageable,uid))
     }
 
     @GetMapping("/{todoId}")

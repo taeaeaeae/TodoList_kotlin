@@ -44,8 +44,7 @@ fun Todo.toResponse() : TodoResponse {
         title = title,
         content = content,
         uid = uid,
-        yn = yn,
-//        reply = replys.map { it.toResponse() }
+        yn = yn
     )
 }
 

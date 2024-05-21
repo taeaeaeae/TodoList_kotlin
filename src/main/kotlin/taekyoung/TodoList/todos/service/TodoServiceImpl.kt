@@ -18,7 +18,7 @@ import taekyoung.TodoList.todos.repository.TodoRepository
 class TodoServiceImpl(
     private val repository: TodoRepository
 ) : TodoService {
-    override fun getAllTodo(pageable: Pageable): List<TodoResponse> {
+    override fun getAllTodo(pageable: Pageable, uid:String): List<TodoResponse> {
         val todo : Page<Todo> = repository.findAll(pageable)
         return todo.content.map { it.toResponse() }
     }
