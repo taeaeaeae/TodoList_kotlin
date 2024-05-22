@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Size
 import taekyoung.TodoList.todos.dto.GetTodoResponse
 import taekyoung.TodoList.todos.dto.TodoResponse
 import taekyoung.TodoList.todos.dto.UpdateTodoRequest
+import java.time.LocalDateTime
 
 @Entity
 @Table(name = "todo_list")
@@ -25,6 +26,9 @@ class Todo (
     @Column(name = "y_n")
     var yn: Boolean = false,
 
+    @Column(name="created_at")
+    var createdAt: LocalDateTime,
+
     @OneToMany(mappedBy = "todo", fetch = FetchType.LAZY, orphanRemoval = true)
     var replys: MutableList<Reply> = mutableListOf(),
 ){
@@ -38,8 +42,8 @@ class Todo (
 //    }
 
     fun updateTodos(todo: UpdateTodoRequest) {
-        title = if(todo.title == "" || todo.title=="string") title else todo.title
-        content = if(todo.content == "" || todo.content == "string") content else todo.content
+        title = if(todo.title == "") title else todo.title
+        content = if(todo.content == "") content else todo.content
         yn = todo.yn
     }
 }
@@ -49,7 +53,8 @@ fun Todo.toResponse() : TodoResponse {
         title = title,
         content = content,
         uid = uid,
-        yn = yn
+        yn = yn,
+        createAt = createdAt
     )
 }
 

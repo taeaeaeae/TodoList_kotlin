@@ -7,9 +7,7 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import taekyoung.TodoList.exception.ModelNotFoundException
 import taekyoung.TodoList.todos.dto.*
-import taekyoung.TodoList.todos.model.Reply
 import taekyoung.TodoList.todos.model.toResponse
-import taekyoung.TodoList.todos.repository.ReplyRepository
 import taekyoung.TodoList.todos.model.Todo
 import taekyoung.TodoList.todos.model.toGetResponse
 import taekyoung.TodoList.todos.repository.TodoRepository
@@ -40,7 +38,8 @@ class TodoServiceImpl(
             Todo(
                 title = request.title,
                 content = request.content,
-                uid = request.uid
+                uid = request.uid,
+                createdAt = request.createAt
             )
         ).toResponse()
     }
@@ -48,11 +47,6 @@ class TodoServiceImpl(
     @Transactional
     override fun updateTodo(todoId: Long, request: UpdateTodoRequest): TodoResponse {
         val todo = repository.findByIdOrNull(todoId) ?: throw ModelNotFoundException("Todo",todoId)
-//        val (title, content, yn) = request
-//
-//        todo.title = if(title == "" || title=="string") todo.title else title
-//        todo.content = if(content == "" || content == "string") todo.content else content
-//        todo.yn = yn
 
         todo.updateTodos(request)
 
