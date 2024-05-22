@@ -19,8 +19,8 @@ class TodoController(
     private val service: TodoService
 ) {
     @PostMapping
-    fun createTodo( @Valid @RequestBody createCourseRequest: CreateTodoRequest): ResponseEntity<TodoResponse> {
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.createTodo(createCourseRequest))
+    fun createTodo( @Valid @RequestBody createTodoRequest: CreateTodoRequest): ResponseEntity<TodoResponse> {
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.createTodo(createTodoRequest))
     }
 
     @GetMapping()
