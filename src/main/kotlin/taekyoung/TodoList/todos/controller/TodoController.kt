@@ -1,5 +1,6 @@
 package taekyoung.TodoList.todos.controller
 
+import jakarta.validation.Valid
 import org.springframework.data.domain.Pageable
 import org.springframework.data.web.PageableDefault
 import org.springframework.data.web.SortDefault
@@ -18,7 +19,7 @@ class TodoController(
     private val service: TodoService
 ) {
     @PostMapping
-    fun createTodo(@RequestBody createCourseRequest: CreateTodoRequest): ResponseEntity<TodoResponse> {
+    fun createTodo( @Valid @RequestBody createCourseRequest: CreateTodoRequest): ResponseEntity<TodoResponse> {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.createTodo(createCourseRequest))
     }
 
@@ -40,7 +41,7 @@ class TodoController(
     @PutMapping("/{todoId}")
     fun updateTodo(
         @PathVariable todoId: Long,
-        @RequestBody updateCourseRequest: UpdateTodoRequest
+        @RequestBody  @Valid updateCourseRequest: UpdateTodoRequest
     ): ResponseEntity<TodoResponse> {
         return ResponseEntity.status(HttpStatus.OK).body(service.updateTodo(todoId, updateCourseRequest))
     }

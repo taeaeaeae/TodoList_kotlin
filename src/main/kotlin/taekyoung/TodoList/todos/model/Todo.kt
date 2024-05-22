@@ -1,6 +1,7 @@
 package taekyoung.TodoList.todos.model
 
 import jakarta.persistence.*
+import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Size
 import taekyoung.TodoList.todos.dto.GetTodoResponse
 import taekyoung.TodoList.todos.dto.TodoResponse
@@ -9,14 +10,15 @@ import taekyoung.TodoList.todos.dto.UpdateTodoRequest
 @Entity
 @Table(name = "todo_list")
 class Todo (
-    @Size(min = 1, max = 200)
+//    @Size(min = 1, max = 200, message = "Name must be between 1 and 200")
     @Column(name="title")
     var title: String,
 
-    @Size(min = 1, max = 1000)
+//    @Size(min = 1, max = 1000, message = "Description must be between 1 and 1000")
     @Column(name="content")
     var content: String,
 
+//    @NotBlank(message = "uid cannot be blank")
     @Column(name="uid")
     var uid: String,
 
