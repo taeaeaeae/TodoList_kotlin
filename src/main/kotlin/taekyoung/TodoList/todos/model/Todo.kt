@@ -3,6 +3,7 @@ package taekyoung.TodoList.todos.model
 import jakarta.persistence.*
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Size
+import taekyoung.TodoList.todos.dto.CreateTodoRequest
 import taekyoung.TodoList.todos.dto.GetTodoResponse
 import taekyoung.TodoList.todos.dto.TodoResponse
 import taekyoung.TodoList.todos.dto.UpdateTodoRequest
@@ -46,6 +47,13 @@ class Todo (
         content = if(todo.content == "") content else todo.content
         yn = todo.yn
     }
+
+//    fun createTodos(todo: CreateTodoRequest): Todo {
+//        title = todo.title
+//        content = todo.content
+//        uid = todo.uid
+//    }
+
 }
 fun Todo.toResponse() : TodoResponse {
     return TodoResponse(
@@ -65,6 +73,7 @@ fun Todo.toGetResponse() : GetTodoResponse {
         content = content,
         uid = uid,
         yn = yn,
-        reply = replys.map { it.toResponse() }
+        reply = replys.map { it.toResponse() },
+        createdAt = createdAt
     )
 }
