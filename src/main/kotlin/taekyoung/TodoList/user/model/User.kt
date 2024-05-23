@@ -13,7 +13,7 @@ class User (
     @Column(name = "id")
     val id: String,
 
-    @Column(name = "pw")
+    @Column(name = "password")
     val pw: String
 ) {
 }
