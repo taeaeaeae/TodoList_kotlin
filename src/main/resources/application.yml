@@ -15,3 +15,6 @@ logging:
         orm:
           jdbc:
             bind: trace
+
+server:
+  port: 9999
