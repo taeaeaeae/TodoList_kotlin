@@ -39,12 +39,14 @@ class SecurityConfig(
             .sessionManagement { it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
             .authorizeHttpRequests { it
                 .requestMatchers("/api/authenticate").permitAll()// 로그인 api
-                .requestMatchers("/api/signup").permitAll() // 회원가입 api
+                .requestMatchers("/users/signup").permitAll() // 회원가입 api
                 .requestMatchers("/favicon.ico").permitAll()
-                .anyRequest().authenticated() // 그 외 인증 없이 접근X
+                .requestMatchers("/swagger-ui/**").permitAll()
+                .requestMatchers("/v3/api-docs/**").permitAll()
+//                .anyRequest().authenticated() // 그 외 인증 없이 접근X
             }
 //        apply(JwtSecurityConfig(tokenProvider))  // JwtFilter를 addFilterBefore로 등록했던 JwtSecurityConfig class 적용
-            .addFilterBefore(JwtFilter(tokenProvider), UsernamePasswordAuthenticationFilter::class.java)
+//            .addFilterBefore(JwtFilter(tokenProvider), UsernamePasswordAuthenticationFilter::class.java)
         return httpSecurity.build()
     }
 
