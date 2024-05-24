@@ -36,8 +36,8 @@ class SecurityConfig(
     fun filterChain(httpSecurity: HttpSecurity): SecurityFilterChain {
         httpSecurity
             .csrf { it.disable() }
-            .exceptionHandling { it.authenticationEntryPoint(jwtAuthenticationEntryPoint)
-                .accessDeniedHandler(jwtAccessDeniedHandler) }
+//            .exceptionHandling { it.authenticationEntryPoint(jwtAuthenticationEntryPoint)
+//                .accessDeniedHandler(jwtAccessDeniedHandler) }
             .headers { it.frameOptions { it.sameOrigin() } }
 //            .sessionManagement { it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
             .formLogin { it.disable() }
@@ -48,8 +48,8 @@ class SecurityConfig(
                 .requestMatchers("/favicon.ico").permitAll()
                 .requestMatchers("/swagger-ui/**").permitAll()
                 .requestMatchers("/v3/api-docs/**").permitAll()
-                .requestMatchers("/todos/**").permitAll()
-//                .anyRequest().authenticated() // 그 외 인증 없이 접근X
+//                .requestMatchers("/todos/**").permitAll()
+                .anyRequest().authenticated() // 그 외 인증 없이 접근X
             }
 //        apply(JwtSecurityConfig(tokenProvider))  // JwtFilter를 addFilterBefore로 등록했던 JwtSecurityConfig class 적용
 //            .addFilterBefore(JwtFilter(tokenProvider), UsernamePasswordAuthenticationFilter::class.java)

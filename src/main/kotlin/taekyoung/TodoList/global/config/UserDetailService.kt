@@ -18,7 +18,6 @@ class UserDetailService (
 
         try {
             user = repository.findByIdOrNull(id)!!
-
         } catch (e : InternalAuthenticationServiceException) {
             throw UsernameNotFoundException("User not found")
         }
