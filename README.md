@@ -31,6 +31,12 @@
 ![image](https://github.com/taeaeaeae/TodoList_kotlin/assets/46617216/1c6acb8c-45ae-4dcc-adaa-fda195760752)
 <br>
 
+### 아직 유저와 연결 못함
+<img width="802" alt="image" src="https://github.com/taeaeaeae/TodoList_kotlin/assets/46617216/c678211d-82f8-4343-847c-628b69867481">
+
+
+<br>
+
 ## 유스케이스 다이어그램
 ![image](https://github.com/taeaeaeae/TodoList_kotlin/assets/46617216/3d778508-80e1-413f-984b-dbc309b60c9f)
 
