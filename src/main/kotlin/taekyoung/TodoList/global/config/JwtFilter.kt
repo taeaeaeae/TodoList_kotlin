@@ -1,4 +1,4 @@
-package taekyoung.TodoList.global.config
+package taekyoung.TodoList.global.config.taekyoung.TodoList.global.config
 //
 //import org.slf4j.Logger
 //import org.slf4j.LoggerFactory
