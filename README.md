@@ -55,6 +55,13 @@
 댓글수정|`PUT`|/todos/{todoId}/reply/{replyId}|댓글 수정 결과
 댓글삭제|`DELETE`|/todo/{todoId}/reply/{replyId}|댓글 삭제 결과
 
+
+### USER
+기능|method|URL|response
+--|--|--|--
+회원가입|`POST`|/users/signup|가입된 회원 내용
+로그인|`POST`|/login|로그인 세션
+
 <br>
 
 # 패키지 구조
