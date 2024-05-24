@@ -42,6 +42,7 @@
 ![image](https://github.com/taeaeaeae/TodoList_kotlin/assets/46617216/3d778508-80e1-413f-984b-dbc309b60c9f)
 
 <br>
+
 ![image](https://github.com/taeaeaeae/TodoList_kotlin/assets/46617216/4ba0424b-d1d0-424e-877a-56bdf89122d1)
 
 
