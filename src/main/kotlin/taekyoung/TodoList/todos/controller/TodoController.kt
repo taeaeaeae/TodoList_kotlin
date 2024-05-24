@@ -1,6 +1,7 @@
 package taekyoung.TodoList.todos.controller
 
 import jakarta.validation.Valid
+import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.data.web.PageableDefault
 import org.springframework.http.HttpStatus
@@ -28,7 +29,7 @@ class TodoController(
 //        @SortDefault(sort = ["desc"], direction = Sort.Direction.ASC)
         @RequestParam uid: String?,
         @PageableDefault(size = 10, page = 0) pageable: Pageable
-    ): ResponseEntity<List<TodoResponse>> {
+    ): ResponseEntity<Page<TodoResponse>> {
         val principal = SecurityContextHolder.getContext().authentication.principal
         println("~~~~~~~~~~~~~~~~~~~~~~~ ${principal} ~~~~~~~~~~~~~~~~~~~~")
         pageable.sort.descending()

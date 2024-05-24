@@ -11,21 +11,20 @@ import taekyoung.TodoList.todos.model.toResponse
 import taekyoung.TodoList.todos.model.Todo
 import taekyoung.TodoList.todos.model.toGetResponse
 import taekyoung.TodoList.todos.repository.TodoRepository
-import java.time.LocalDateTime
 
 @Service
 class TodoServiceImpl(
     private val repository: TodoRepository
 ) : TodoService {
-    override fun getAllTodo(pageable: Pageable, uid:String?): List<TodoResponse> {
+    override fun getAllTodo(pageable: Pageable, uid:String?): Page<TodoResponse> {
 
         if(uid.equals("") || uid==null) {
             val todo : Page<Todo> = repository.findAll(pageable)
 
-            return todo.content.map { it.toResponse() }
+            return todo.map { it.toResponse() }
         }
         val todo : Page<Todo> = repository.findAllByUid(uid, pageable)
-        return todo.content.map { it.toResponse() }
+        return todo.map { it.toResponse() }
     }
 
     override fun getTodoById(todoId: Long): GetTodoResponse {
