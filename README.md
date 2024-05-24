@@ -6,6 +6,7 @@
 - 댓글을 작성 할 수 있으며 작성 시 아이디와 비밀번호를 입력받는다.
 - 아이디와 비밀번호 일치시에만 수정, 삭제가 가능하다.
 - 오름차순 내림차순으로 정렬이 가능하다.
+- 회원가입을 하고 로그인을 할 수 있다
 <br>
 
 <!--
@@ -39,6 +40,9 @@
 
 ## 유스케이스 다이어그램
 ![image](https://github.com/taeaeaeae/TodoList_kotlin/assets/46617216/3d778508-80e1-413f-984b-dbc309b60c9f)
+
+<br>
+![image](https://github.com/taeaeaeae/TodoList_kotlin/assets/46617216/67532048-b734-44bf-ade0-6b366f47fd37)
 
 
 <br>
