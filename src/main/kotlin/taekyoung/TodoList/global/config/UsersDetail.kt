@@ -3,7 +3,7 @@ package taekyoung.TodoList.global.config.taekyoung.TodoList.global.config
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
-import taekyoung.TodoList.user.model.User
+import taekyoung.TodoList.domain.user.model.User
 
 class UsersDetail(
     private val user : User

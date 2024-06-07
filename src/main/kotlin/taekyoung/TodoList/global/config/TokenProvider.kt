@@ -13,7 +13,7 @@ import org.springframework.security.core.Authentication
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.stereotype.Component
-import taekyoung.TodoList.user.model.User
+import taekyoung.TodoList.domain.user.model.User
 import java.nio.charset.StandardCharsets
 import java.security.Key
 import java.util.*

@@ -2,12 +2,12 @@ package taekyoung.TodoList.global.config.taekyoung.TodoList.global.config
 
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.security.authentication.InternalAuthenticationServiceException
-import taekyoung.TodoList.user.model.User
+import taekyoung.TodoList.domain.user.model.User
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.stereotype.Service
-import taekyoung.TodoList.user.repository.UserRepository
+import taekyoung.TodoList.domain.user.repository.UserRepository
 
 @Service
 class UserDetailService (
