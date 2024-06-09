@@ -1,5 +1,6 @@
 package taekyoung.TodoList.domain.todos.service
 
+import com.teamsparta.courseregistation.domain.user.exception.InvalidCredentialException
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -11,11 +12,13 @@ import taekyoung.TodoList.domain.todos.model.Reply
 import taekyoung.TodoList.domain.todos.model.toResponse
 import taekyoung.TodoList.domain.todos.repository.ReplyRepository
 import taekyoung.TodoList.domain.todos.repository.TodoRepository
+import taekyoung.TodoList.domain.user.repository.UserRepository
 
 @Service
 class ReplyServiceImpl(
     private val repository: ReplyRepository,
-    private val todoRepository: TodoRepository
+    private val todoRepository: TodoRepository,
+    private val userRepository: UserRepository
 ) : ReplyService {
 
     override fun getReplyList(todoId: Long): List<ReplyResponse> {
@@ -26,34 +29,40 @@ class ReplyServiceImpl(
     }
 
     @Transactional
-    override fun addReply(todoId: Long, request: AddReplyRequest): ReplyResponse {
+    override fun addReply(todoId: Long, request: AddReplyRequest, id: String): ReplyResponse {
         val todo = todoRepository.findByIdOrNull(todoId) ?: throw ModelNotFoundException("Todo",todoId)
+        val user = userRepository.findByIdOrNull(id) ?: throw ModelNotFoundException("User", 0)
 
         return repository.save(
             Reply(
                 content = request.content,
-                uid = request.uid,
-                pw = request.pw,
+                uid = user,
                 todo = todo
             )
         ).toResponse()
     }
 
     @Transactional
-    override fun updateReply(todoId: Long, replyId: Long, request: UpdateReplyRequest): ReplyResponse {
+    override fun updateReply(todoId: Long, replyId: Long, request: UpdateReplyRequest, id: String): ReplyResponse {
         val reply = repository.findByTodoIdAndId(todoId, replyId) ?: throw ModelNotFoundException("Reply",replyId)
+        val user = userRepository.findByIdOrNull(id) ?: throw ModelNotFoundException("User", 0)
 
-        val (content,uid,pw) = request
-        if(reply.uid == uid && reply.pw == pw) {
-            reply.content = content
+        if(user.id != reply.uid.id) {
+            throw InvalidCredentialException()
         }
+
+        reply.content = request.content
+
         return repository.save(reply).toResponse()
     }
 
     @Transactional
-    override fun deleteReply(todoId: Long, replyId: Long) {
+    override fun deleteReply(todoId: Long, replyId: Long, id: String) {
         val reply = repository.findByIdOrNull(replyId) ?: throw ModelNotFoundException("Reply",replyId)
-
+        val user = userRepository.findByIdOrNull(id) ?: throw ModelNotFoundException("User", 0)
+        if(user.id != reply.uid.id) {
+            throw InvalidCredentialException()
+        }
         repository.delete(reply)
     }
 

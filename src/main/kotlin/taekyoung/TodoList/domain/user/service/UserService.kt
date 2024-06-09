@@ -2,6 +2,7 @@ package taekyoung.TodoList.domain.user.service
 
 import com.teamsparta.courseregistation.domain.user.exception.InvalidCredentialException
 import org.springframework.data.repository.findByIdOrNull
+import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import taekyoung.TodoList.domain.exception.ModelNotFoundException
@@ -51,6 +52,10 @@ class UserService(
                 role = user.role.name
             )
         )
+    }
+    fun getUserDetails(): UserResponse? {
+        val principal = SecurityContextHolder.getContext().authentication.principal
+        return if (principal is UserResponse) principal else null
     }
 
 //    fun updateUser???????

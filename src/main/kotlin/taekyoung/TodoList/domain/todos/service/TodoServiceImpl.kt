@@ -1,5 +1,6 @@
 package taekyoung.TodoList.domain.todos.service
 
+import com.teamsparta.courseregistation.domain.user.exception.InvalidCredentialException
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.data.repository.findByIdOrNull
@@ -14,10 +15,12 @@ import taekyoung.TodoList.domain.todos.model.toResponse
 import taekyoung.TodoList.domain.todos.model.Todo
 import taekyoung.TodoList.domain.todos.model.toGetResponse
 import taekyoung.TodoList.domain.todos.repository.TodoRepository
+import taekyoung.TodoList.domain.user.repository.UserRepository
 
 @Service
 class TodoServiceImpl(
-    private val repository: TodoRepository
+    private val repository: TodoRepository,
+    private val userRepository: UserRepository
 ) : TodoService {
     override fun getAllTodo(pageable: Pageable, uid:String?): Page<TodoResponse> {
 
@@ -36,20 +39,26 @@ class TodoServiceImpl(
     }
 
     @Transactional
-    override fun createTodo(request: CreateTodoRequest): TodoResponse {
+    override fun createTodo(request: CreateTodoRequest, id: String): TodoResponse {
+        val user = userRepository.findByIdOrNull(id) ?: throw ModelNotFoundException("User", 0)
         return repository.save(
             Todo(
                 title = request.title,
                 content = request.content,
-                uid = request.uid,
+                uid = user,
                 createdAt = request.createAt
             )
         ).toResponse()
     }
 
     @Transactional
-    override fun updateTodo(todoId: Long, request: UpdateTodoRequest): TodoResponse {
+    override fun updateTodo(todoId: Long, request: UpdateTodoRequest, id: String): TodoResponse {
         val todo = repository.findByIdOrNull(todoId) ?: throw ModelNotFoundException("Todo",todoId)
+        val user = userRepository.findByIdOrNull(id) ?: throw ModelNotFoundException("User", 0)
+
+        if(user.id != todo.uid.id) {
+            throw InvalidCredentialException()
+        }
 
         todo.updateTodos(request)
 
@@ -57,8 +66,12 @@ class TodoServiceImpl(
     }
 
     @Transactional
-    override fun deleteTodo(todoId: Long) {
+    override fun deleteTodo(todoId: Long, id: String) {
         val todo = repository.findByIdOrNull(todoId) ?: throw ModelNotFoundException("Todo",todoId)
+        val user = userRepository.findByIdOrNull(id) ?: throw ModelNotFoundException("User", 0)
+        if(user.id != todo.uid.id) {
+            throw InvalidCredentialException()
+        }
         repository.delete(todo)
     }
 

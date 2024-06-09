@@ -7,7 +7,7 @@ import taekyoung.TodoList.domain.todos.dto.*
 interface TodoService {
     fun getAllTodo(pageable: Pageable, uid:String?) : Page<TodoResponse>
     fun getTodoById(todoId:Long) : GetTodoResponse
-    fun createTodo(request : CreateTodoRequest): TodoResponse
-    fun updateTodo(todoId: Long, request : UpdateTodoRequest) : TodoResponse
-    fun deleteTodo(todoId: Long)
+    fun createTodo(request : CreateTodoRequest, id: String): TodoResponse
+    fun updateTodo(todoId: Long, request : UpdateTodoRequest, id: String) : TodoResponse
+    fun deleteTodo(todoId: Long, id: String)
 }
