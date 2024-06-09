@@ -1,5 +1,6 @@
 package taekyoung.TodoList.domain.todos.dto
 
+import taekyoung.TodoList.domain.user.dto.UserResponse
 import java.time.LocalDateTime
 
 data class TodoResponse(
@@ -7,7 +8,7 @@ data class TodoResponse(
     val title: String,
     val content: String,
     val yn : Boolean,
-    val uid: String,
+    val uid: UserResponse,
     val createAt: LocalDateTime
 //    val createAt:Date,
 //    val reply: List<ReplyResponse>

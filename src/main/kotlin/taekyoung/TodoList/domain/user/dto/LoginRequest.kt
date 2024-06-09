@@ -6,5 +6,7 @@ data class LoginRequest(
     @field:NotBlank(message = "???????????")
     val id:String,
     @field:NotBlank(message = "!!!!!!!!!!!!")
-    val pw:String
+    val pw:String,
+    @field:NotBlank(message = "role!!!!!!")
+    val role:String
 )

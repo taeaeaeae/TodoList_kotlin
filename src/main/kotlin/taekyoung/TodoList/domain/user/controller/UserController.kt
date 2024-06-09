@@ -5,6 +5,8 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import taekyoung.TodoList.domain.user.dto.LoginRequest
+import taekyoung.TodoList.domain.user.dto.LoginResponse
 import taekyoung.TodoList.domain.user.dto.SignUpUserRequest
 import taekyoung.TodoList.domain.user.dto.UserResponse
 import taekyoung.TodoList.domain.user.service.UserService
@@ -21,8 +23,9 @@ class UserController (
         return ResponseEntity.status(HttpStatus.CREATED).body(service.signUp(signup))
     }
 
-    @PostMapping("/login", consumes = [MediaType.APPLICATION_FORM_URLENCODED_VALUE])
-    fun login(@RequestBody request: SignUpUserRequest){
+    @PostMapping("/login")
+    fun login(@RequestBody request: LoginRequest): ResponseEntity<LoginResponse> {
+        return ResponseEntity.status(HttpStatus.OK).body(service.login(request))
     }
 
 
