@@ -39,7 +39,7 @@ class TodoServiceImpl(
     }
 
     @Transactional
-    override fun createTodo(request: CreateTodoRequest, id: String): TodoResponse {
+    override fun createTodo(request: CreateTodoRequest, id: String?): TodoResponse {
         val user = userRepository.findByIdOrNull(id) ?: throw ModelNotFoundException("User", 0)
         return repository.save(
             Todo(
@@ -52,7 +52,7 @@ class TodoServiceImpl(
     }
 
     @Transactional
-    override fun updateTodo(todoId: Long, request: UpdateTodoRequest, id: String): TodoResponse {
+    override fun updateTodo(todoId: Long, request: UpdateTodoRequest, id: String?): TodoResponse {
         val todo = repository.findByIdOrNull(todoId) ?: throw ModelNotFoundException("Todo",todoId)
         val user = userRepository.findByIdOrNull(id) ?: throw ModelNotFoundException("User", 0)
 
@@ -66,7 +66,7 @@ class TodoServiceImpl(
     }
 
     @Transactional
-    override fun deleteTodo(todoId: Long, id: String) {
+    override fun deleteTodo(todoId: Long, id: String?) {
         val todo = repository.findByIdOrNull(todoId) ?: throw ModelNotFoundException("Todo",todoId)
         val user = userRepository.findByIdOrNull(id) ?: throw ModelNotFoundException("User", 0)
         if(user.id != todo.uid.id) {

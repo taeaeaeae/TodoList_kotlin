@@ -14,6 +14,7 @@ import taekyoung.TodoList.domain.user.model.User
 import taekyoung.TodoList.domain.user.model.UserRole
 import taekyoung.TodoList.domain.user.model.toResponse
 import taekyoung.TodoList.domain.user.repository.UserRepository
+import taekyoung.TodoList.infra.security.UserPrincipal
 import taekyoung.TodoList.infra.security.jwt.TokenProvider
 
 @Service
@@ -53,9 +54,9 @@ class UserService(
             )
         )
     }
-    fun getUserDetails(): UserResponse? {
+    fun getUserDetails(): UserPrincipal? {
         val principal = SecurityContextHolder.getContext().authentication.principal
-        return if (principal is UserResponse) principal else null
+        return if (principal is UserPrincipal) principal else null
     }
 
 //    fun updateUser???????

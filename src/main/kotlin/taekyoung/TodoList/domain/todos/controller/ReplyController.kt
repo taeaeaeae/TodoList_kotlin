@@ -24,7 +24,7 @@ class ReplyController(
     @PostMapping
     @PreAuthorize("hasRole('HOST') or hasRole('GEUST')")
     fun addReply(@PathVariable("todoId") todoId: Long, @RequestBody addReplyRequest: AddReplyRequest): ResponseEntity<ReplyResponse> {
-        val id = userService.getUserDetails()!!.id
+        val id = userService.getUserDetails()!!.uid
         return ResponseEntity.status(HttpStatus.CREATED).body(service.addReply(todoId, addReplyRequest,id))
     }
 
@@ -33,14 +33,14 @@ class ReplyController(
     fun updateReply(@PathVariable("todoId") todoId: Long, @PathVariable("replyId") replyId: Long,
                     @RequestBody updateReplyRequest: UpdateReplyRequest
     ): ResponseEntity<ReplyResponse> {
-        val id = userService.getUserDetails()!!.id
+        val id = userService.getUserDetails()!!.uid
         return ResponseEntity.status(HttpStatus.OK).body(service.updateReply(todoId, replyId, updateReplyRequest,id))
     }
 
     @DeleteMapping("/{replyId}")
     @PreAuthorize("hasRole('HOST') or hasRole('GEUST')")
     fun removeReply(@PathVariable("todoId") todoId: Long,@PathVariable("replyId") replyId: Long): ResponseEntity<Unit> {
-        val id = userService.getUserDetails()!!.id
+        val id = userService.getUserDetails()!!.uid
         service.deleteReply(todoId, replyId,id)
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build()
     }
