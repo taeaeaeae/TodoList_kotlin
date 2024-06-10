@@ -29,11 +29,20 @@
 
 # 설계
 ## ERD 
+
+![image](https://github.com/taeaeaeae/TodoList_kotlin/assets/46617216/a5e986f0-4955-40e2-a9d5-a97240122de0)
+
+<details>
+  
+<summary>이전ERD</summary>
+
 ![image](https://github.com/taeaeaeae/TodoList_kotlin/assets/46617216/1c6acb8c-45ae-4dcc-adaa-fda195760752)
 <br>
 
 ### 아직 유저와 연결 못함
 <img width="802" alt="image" src="https://github.com/taeaeaeae/TodoList_kotlin/assets/46617216/c678211d-82f8-4343-847c-628b69867481">
+
+</details>
 
 
 <br>
@@ -44,8 +53,6 @@
 <br>
 
 ![image](https://github.com/taeaeaeae/TodoList_kotlin/assets/46617216/4ba0424b-d1d0-424e-877a-56bdf89122d1)
-
-
 
 <br>
 
