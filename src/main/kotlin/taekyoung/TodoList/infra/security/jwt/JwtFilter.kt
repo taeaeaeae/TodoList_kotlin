@@ -30,11 +30,9 @@ class JwtFilter(
                 .onSuccess {
                     val userId = it.payload.subject.toString()
                     val role = it.payload.get("role", String::class.java)
-//                    val email = it.payload.get("email", String::class.java)
 
                     val principal = UserPrincipal(
                         uid = userId,
-//                        email = email,
                         roles = setOf(role)
                     )
                     val authentication = JwtAuthToken(
@@ -46,8 +44,6 @@ class JwtFilter(
         }
         filterChain.doFilter(request, response)
     }
-
-
 
     private fun HttpServletRequest.getBearerToken(): String? {
         val headerValue = this.getHeader(HttpHeaders.AUTHORIZATION) ?: return null
