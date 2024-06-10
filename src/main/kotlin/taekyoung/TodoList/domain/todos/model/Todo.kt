@@ -7,6 +7,8 @@ import taekyoung.TodoList.domain.todos.dto.CreateTodoRequest
 import taekyoung.TodoList.domain.todos.dto.GetTodoResponse
 import taekyoung.TodoList.domain.todos.dto.TodoResponse
 import taekyoung.TodoList.domain.todos.dto.UpdateTodoRequest
+import taekyoung.TodoList.domain.user.model.User
+import taekyoung.TodoList.domain.user.model.toResponse
 import java.time.LocalDateTime
 
 @Entity
@@ -21,8 +23,12 @@ class Todo (
     var content: String,
 
 //    @NotBlank(message = "uid cannot be blank")
-    @Column(name="uid")
-    var uid: String,
+//    @Column(name="uid")
+//    var uid: String,
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "uid", nullable = false)
+    var uid: User,
 
     @Column(name = "y_n")
     var yn: Boolean = false,
@@ -60,7 +66,7 @@ fun Todo.toResponse() : TodoResponse {
         id = id!!,
         title = title,
         content = content,
-        uid = uid,
+        uid = uid.toResponse(),
         yn = yn,
         createAt = createdAt
     )
@@ -71,7 +77,7 @@ fun Todo.toGetResponse() : GetTodoResponse {
         id = id!!,
         title = title,
         content = content,
-        uid = uid,
+        uid = uid.toResponse(),
         yn = yn,
         reply = replys.map { it.toResponse() },
         createdAt = createdAt

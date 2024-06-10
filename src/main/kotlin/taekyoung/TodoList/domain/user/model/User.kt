@@ -1,9 +1,6 @@
 package taekyoung.TodoList.domain.user.model
 
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.Id
-import jakarta.persistence.Table
+import jakarta.persistence.*
 import taekyoung.TodoList.domain.user.dto.UserResponse
 
 @Entity
@@ -14,13 +11,18 @@ class User (
     val id: String,
 
     @Column(name = "password")
-    val pw: String
+    val pw: String,
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role")
+    val role: UserRole,
 ) {
 }
 
 fun User.toResponse() : UserResponse {
     return UserResponse(
         id = id,
-        pw = pw
+//        pw = pw,
+        role = role.name
     )
 }

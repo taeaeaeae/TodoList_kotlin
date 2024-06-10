@@ -6,7 +6,7 @@ import taekyoung.TodoList.domain.todos.dto.UpdateReplyRequest
 
 interface ReplyService {
     fun getReplyList(todoId: Long): List<ReplyResponse>
-    fun addReply(todoId: Long, request : AddReplyRequest) : ReplyResponse
-    fun updateReply(todoId: Long, replyId: Long, request: UpdateReplyRequest): ReplyResponse
-    fun deleteReply(todoId: Long, replyId: Long)
+    fun addReply(todoId: Long, request : AddReplyRequest, id: String) : ReplyResponse
+    fun updateReply(todoId: Long, replyId: Long, request: UpdateReplyRequest, id: String): ReplyResponse
+    fun deleteReply(todoId: Long, replyId: Long, id: String)
 }
