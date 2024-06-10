@@ -54,9 +54,8 @@ class TodoServiceImpl(
     @Transactional
     override fun updateTodo(todoId: Long, request: UpdateTodoRequest, id: String?): TodoResponse {
         val todo = repository.findByIdOrNull(todoId) ?: throw ModelNotFoundException("Todo",todoId)
-        val user = userRepository.findByIdOrNull(id) ?: throw ModelNotFoundException("User", 0)
 
-        if(user.id != todo.uid.id) {
+        if(id != todo.uid.id) {
             throw InvalidCredentialException()
         }
 
@@ -68,8 +67,7 @@ class TodoServiceImpl(
     @Transactional
     override fun deleteTodo(todoId: Long, id: String?) {
         val todo = repository.findByIdOrNull(todoId) ?: throw ModelNotFoundException("Todo",todoId)
-        val user = userRepository.findByIdOrNull(id) ?: throw ModelNotFoundException("User", 0)
-        if(user.id != todo.uid.id) {
+        if(id != todo.uid.id) {
             throw InvalidCredentialException()
         }
         repository.delete(todo)

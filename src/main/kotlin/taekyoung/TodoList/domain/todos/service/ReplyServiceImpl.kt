@@ -45,9 +45,8 @@ class ReplyServiceImpl(
     @Transactional
     override fun updateReply(todoId: Long, replyId: Long, request: UpdateReplyRequest, id: String): ReplyResponse {
         val reply = repository.findByTodoIdAndId(todoId, replyId) ?: throw ModelNotFoundException("Reply",replyId)
-        val user = userRepository.findByIdOrNull(id) ?: throw ModelNotFoundException("User", 0)
 
-        if(user.id != reply.uid.id) {
+        if(id != reply.uid.id) {
             throw InvalidCredentialException()
         }
 
@@ -59,8 +58,7 @@ class ReplyServiceImpl(
     @Transactional
     override fun deleteReply(todoId: Long, replyId: Long, id: String) {
         val reply = repository.findByIdOrNull(replyId) ?: throw ModelNotFoundException("Reply",replyId)
-        val user = userRepository.findByIdOrNull(id) ?: throw ModelNotFoundException("User", 0)
-        if(user.id != reply.uid.id) {
+        if(id != reply.uid.id) {
             throw InvalidCredentialException()
         }
         repository.delete(reply)
