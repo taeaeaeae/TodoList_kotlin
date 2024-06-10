@@ -54,12 +54,12 @@ class UserService(
             )
         )
     }
+
     fun getUserDetails(): UserPrincipal? {
         val principal = SecurityContextHolder.getContext().authentication.principal
         return if (principal is UserPrincipal) principal else null
     }
 
-//    fun updateUser???????
 
 
 }
